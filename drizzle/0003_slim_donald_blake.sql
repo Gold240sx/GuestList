@@ -1,0 +1,1 @@
+ALTER TABLE "guestlist_profile" ADD COLUMN "appIconUrl" varchar(500);

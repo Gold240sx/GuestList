@@ -2,18 +2,29 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import PublicProfileClient from "@/components/public-profile-client";
 import { User } from "lucide-react";
+import { api } from "@/trpc/server";
 
-export default function Home() {
+export default async function Home() {
+  const profile = await api.profile.get();
+
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-background/95 backdrop-blur-sm z-10 border-b">
-        <Link href="/" className="flex items-center justify-center" prefetch={false}>
-          <User className="h-6 w-6 text-primary" />
-          <span className="sr-only">Profile</span>
-        </Link>
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          {profile?.appIconUrl ? (
+            <img 
+              src={profile.appIconUrl} 
+              alt="App Icon" 
+              className="h-8 w-8 rounded object-cover"
+            />
+          ) : (
+            <User className="h-6 w-6 text-primary" />
+          )}
+          <span className="font-semibold">LinkHub</span>
+            </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Button asChild variant="outline">
-            <Link href="/dashboard">Admin Dashboard</Link>
+            <Link href="/admin">Admin Dashboard</Link>
           </Button>
         </nav>
       </header>

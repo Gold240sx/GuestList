@@ -1,0 +1,402 @@
+{
+  "id": "359494e3-cd9b-4bc3-a302-8c69ffd99dc1",
+  "prevId": "4721c57b-de8a-44f7-9825-edd6589d8578",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.guestlist_guest": {
+      "name": "guestlist_guest",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "guestlist_guest_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "note": {
+          "name": "note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publicAction": {
+          "name": "publicAction",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "displayNamePref": {
+          "name": "displayNamePref",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "hidden": {
+          "name": "hidden",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "email_idx": {
+          "name": "email_idx",
+          "columns": [
+            {
+              "expression": "email",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "created_at_idx": {
+          "name": "created_at_idx",
+          "columns": [
+            {
+              "expression": "createdAt",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "role_idx": {
+          "name": "role_idx",
+          "columns": [
+            {
+              "expression": "role",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "hidden_idx": {
+          "name": "hidden_idx",
+          "columns": [
+            {
+              "expression": "hidden",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.guestlist_profile": {
+      "name": "guestlist_profile",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "guestlist_profile_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "aboutMe": {
+          "name": "aboutMe",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "networkingStatement": {
+          "name": "networkingStatement",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profilePictureUrl": {
+          "name": "profilePictureUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "appIconUrl": {
+          "name": "appIconUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "linkedinUrl": {
+          "name": "linkedinUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "githubUrl": {
+          "name": "githubUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "buyMeACoffeeUrl": {
+          "name": "buyMeACoffeeUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "portfolioUrl": {
+          "name": "portfolioUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "resumeUrl": {
+          "name": "resumeUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notificationEmail": {
+          "name": "notificationEmail",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.guestlist_resume": {
+      "name": "guestlist_resume",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "byDefault",
+            "name": "guestlist_resume_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "fileName": {
+          "name": "fileName",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fileUrl": {
+          "name": "fileUrl",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fileSize": {
+          "name": "fileSize",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fileType": {
+          "name": "fileType",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "uploadThingId": {
+          "name": "uploadThingId",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "isCurrent": {
+          "name": "isCurrent",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "downloadCount": {
+          "name": "downloadCount",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      },
+      "indexes": {
+        "resume_upload_thing_id_idx": {
+          "name": "resume_upload_thing_id_idx",
+          "columns": [
+            {
+              "expression": "uploadThingId",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "resume_is_current_idx": {
+          "name": "resume_is_current_idx",
+          "columns": [
+            {
+              "expression": "isCurrent",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "resume_created_at_idx": {
+          "name": "resume_created_at_idx",
+          "columns": [
+            {
+              "expression": "createdAt",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "guestlist_guest" ADD COLUMN "profileImageUrl" varchar(500);

@@ -1,6 +1,3 @@
-
-import type { Timestamp } from "firebase/firestore";
-
 export type DisplayNamePref = 'full' | 'initial' | 'anonymous';
 
 export type RoleOption = "business owner" | "recruiter" | "developer" | "hiring manager" | "professional" | "friend" | "other";
@@ -8,33 +5,42 @@ export type RoleOption = "business owner" | "recruiter" | "developer" | "hiring 
 export type PublicAction = "Just saying hi!" | "Let's connect!" | "Downloaded the resume";
 
 export interface Guest {
-  id: string; // Firestore document ID
+  id: number;
   name: string;
-  phone: string;
+  phone: string | null;
   email: string;
-  note: string; // This is the private note
-  publicAction: PublicAction; // This is for the public feed
-  role: RoleOption;
-  displayNamePref: DisplayNamePref;
-  createdAt: Date;
-}
-
-export interface GuestDocument {
-  name: string;
-  phone: string;
-  email: string;
-  note: string;
+  note: string | null;
   publicAction: PublicAction;
   role: RoleOption;
   displayNamePref: DisplayNamePref;
-  createdAt: Timestamp;
+  profileImageUrl: string | null;
+  hidden: boolean;
+  createdAt: Date;
 }
 
 export interface ProfileData {
+  id: number;
   name: string;
   aboutMe: string;
   networkingStatement: string;
   profilePictureUrl: string;
+  appIconUrl: string | null;
+  linkedinUrl: string | null;
+  githubUrl: string | null;
+  buyMeACoffeeUrl: string | null;
+  portfolioUrl: string | null;
+  resumeUrl: string | null;
+  notificationEmail: string;
+  createdAt: Date;
+  updatedAt: Date | null;
+}
+
+export interface ProfileFormData {
+  name: string;
+  aboutMe: string;
+  networkingStatement: string;
+  profilePictureUrl: string;
+  appIconUrl: string;
   linkedinUrl: string;
   githubUrl: string;
   buyMeACoffeeUrl: string;
@@ -42,3 +48,15 @@ export interface ProfileData {
   resumeUrl: string;
   notificationEmail: string;
 }
+
+export interface Resume {
+  id: number;
+  fileName: string;
+  fileUrl: string;
+  fileSize: number;
+  fileType: string;
+  uploadThingId: string;
+  isCurrent: boolean;
+  downloadCount: number;
+  createdAt: Date;
+} 
