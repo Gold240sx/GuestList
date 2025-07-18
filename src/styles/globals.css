@@ -37,10 +37,25 @@
   * {
     @apply border-border;
   }
+  
+  /* Ensure viewport background matches app background on mobile */
+  html {
+    background: linear-gradient(135deg, #829400 0%, #06B2CD 100%);
+    min-height: 100vh;
+  }
+  
   body {
     @apply text-black;
     background: linear-gradient(135deg, #829400 0%, #06B2CD 100%);
     min-height: 100vh;
+  }
+  
+  /* Fix for iOS Safari viewport background */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      background: linear-gradient(135deg, #829400 0%, #06B2CD 100%);
+      background-attachment: fixed;
+    }
   }
 
   /* Override default input focus styles */

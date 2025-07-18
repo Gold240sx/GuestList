@@ -24,6 +24,12 @@ export const metadata: Metadata = {
   title: "Michael Martell's LinkHub - Professional Networking",
   description: "Connect with professionals and build your network",
   icons: [{ rel: "icon", url: "/public/favicon.ico" }],
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
