@@ -30,6 +30,14 @@ export const metadata: Metadata = {
     maximumScale: 1,
     userScalable: false,
   },
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'mobile-web-app-capable': 'yes',
+    'theme-color': '#829400',
+    'msapplication-navbutton-color': '#829400',
+    'apple-mobile-web-app-title': 'LinkHub',
+  },
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {

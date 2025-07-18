@@ -57,6 +57,22 @@
       background-attachment: fixed;
     }
   }
+  
+  /* Status bar styling for mobile */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+  
+  /* Ensure the gradient extends to the very top and bottom */
+  html {
+    background: linear-gradient(135deg, #829400 0%, #06B2CD 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100vh;
+  }
 
   /* Override default input focus styles */
   input:focus,
