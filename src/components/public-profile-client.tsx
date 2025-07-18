@@ -264,21 +264,23 @@ export default function PublicProfileClient() {
 										</AvatarFallback>
 									</Avatar>
 									<div className="flex-1">
-										<div className="flex items-center gap-2 flex-wrap">
+										<div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-wrap">
 											<p className="font-semibold text-black text-lg">
 												{getDisplayName(guest as Guest)}
 											</p>
-											<Badge
-												variant="secondary"
-												className="capitalize flex items-center gap-1 bg-white/20 backdrop-blur-sm border border-white/30 text-black">
-												<Briefcase className="h-3 w-3" />
-												{guest.role}
-											</Badge>
-											<p
-												id="lower-left-date"
-												className="text-xs text-black/60 mt-2 ">
-												{formatDate(guest.createdAt)}
-											</p>
+											<div className="flex flex-col sm:flex-row sm:items-center gap-2">
+												<Badge
+													variant="secondary"
+													className="capitalize flex items-center gap-1 bg-white/20 backdrop-blur-sm border border-white/30 text-black w-fit">
+													<Briefcase className="h-3 w-3" />
+													{guest.role}
+												</Badge>
+												<p
+													id="lower-left-date"
+													className="text-xs text-black/60">
+													{formatDate(guest.createdAt)}
+												</p>
+											</div>
 										</div>
 										<p className="text-sm text-black/70 mt-1">
 											{guest.publicAction}

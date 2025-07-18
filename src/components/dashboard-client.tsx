@@ -27,6 +27,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import DashboardUserComment from "./dashboard-user-comment";
+import ResumeInstance from "./resume-instance";
 
 const getDisplayName = (guest: Guest) => {
     if (guest.displayNamePref === 'anonymous') return 'Anonymous';
@@ -183,15 +185,15 @@ export default function DashboardClient() {
     })
   }
 
-  const handleDeleteGuest = async (id: number) => {
-    const guestToDelete = guests.find(guest => guest.id === id);
+  const handleDeleteGuest = async (id: string) => {
+    const guestToDelete = guests.find(guest => guest.id.toString() === id);
     if(guestToDelete) {
-        deleteGuest.mutate({ id });
+        deleteGuest.mutate({ id: parseInt(id) });
     }
   };
 
-  const handleToggleGuestHidden = async (id: number) => {
-    toggleGuestHidden.mutate({ id });
+  const handleToggleGuestHidden = async (id: string) => {
+    toggleGuestHidden.mutate({ id: parseInt(id) });
   };
 
   const handleDeleteResume = async (id: number) => {
@@ -275,8 +277,8 @@ export default function DashboardClient() {
   }
 
   return (
-		<div className="space-y-8">
-			<Card>
+		<div className="space-y-8 p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+			<Card className="bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg">
 				<CardHeader className="flex flex-row items-center justify-between">
 					<div className="flex items-center gap-4">
 						<Avatar className="h-20 w-20 border">
@@ -301,7 +303,7 @@ export default function DashboardClient() {
 				<CardContent>
 					<div className="space-y-4">
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-primary">
 									{guests.length}
 								</div>
@@ -309,23 +311,29 @@ export default function DashboardClient() {
 									Total Guests
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-green-500">
-									{guests.filter((guest) => !guest.hidden).length}
+									{
+										guests.filter((guest) => !guest.hidden)
+											.length
+									}
 								</div>
 								<div className="text-sm text-muted-foreground">
 									Visible
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-blue-500">
-									{guests.filter((guest) => guest.hidden).length}
+									{
+										guests.filter((guest) => guest.hidden)
+											.length
+									}
 								</div>
 								<div className="text-sm text-muted-foreground">
 									Hidden
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-purple-500">
 									{resumes.length}
 								</div>
@@ -335,7 +343,7 @@ export default function DashboardClient() {
 							</div>
 						</div>
 						<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-orange-500">
 									{getGuestsToday(guests as Guest[])}
 								</div>
@@ -343,7 +351,7 @@ export default function DashboardClient() {
 									Today
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-yellow-500">
 									{getGuestsInTimeRange(guests as Guest[], 7)}
 								</div>
@@ -351,9 +359,12 @@ export default function DashboardClient() {
 									This Week
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="text-center p-4 rounded-lg bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-white/10 transition-all duration-300">
 								<div className="text-2xl font-bold text-purple-500">
-									{getGuestsInTimeRange(guests as Guest[], 30)}
+									{getGuestsInTimeRange(
+										guests as Guest[],
+										30
+									)}
 								</div>
 								<div className="text-sm text-muted-foreground">
 									This Month
@@ -364,9 +375,9 @@ export default function DashboardClient() {
 				</CardContent>
 			</Card>
 
-			<Card>
+			<Card className="bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg">
 				<CardHeader>
-					<CardTitle className="text-4xl font-bold">
+					<CardTitle className="text-2xl sm:text-4xl font-bold">
 						Edit Profile
 					</CardTitle>
 					<CardDescription>
@@ -380,7 +391,7 @@ export default function DashboardClient() {
 							<Label htmlFor="profile-picture">
 								Profile Picture
 							</Label>
-							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="border-2 border-dashed border-white/40 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-white/60 transition-colors bg-white/5 backdrop-blur-sm shadow-lg">
 								<div className="h-20 w-20 flex items-center justify-center">
 									{formData.profilePictureUrl ? (
 										<img
@@ -394,9 +405,14 @@ export default function DashboardClient() {
 								</div>
 								<div className="text-center">
 									<p className="text-sm text-muted-foreground mb-2">
-										Upload your profile picture (PNG, JPG,
-										JPEG)
+										Upload your profile picture
+										<span className="hidden sm:inline">
+											(PDF, DOC, DOCX)
+										</span>
 									</p>
+									<span className="sm:hidden text-sm text-muted-foreground pb-2">
+										(PDF, DOC, DOCX)
+									</span>
 									<UploadButton
 										endpoint="profilePictureUploader"
 										onClientUploadComplete={
@@ -409,28 +425,33 @@ export default function DashboardClient() {
 												description: `Error: ${error.message}`,
 											})
 										}}
-										className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90"
+										className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90 ut-allowed-content:hidden"
 									/>
 								</div>
 							</div>
 							{formData.profilePictureUrl && (
-								<p className="text-sm text-muted-foreground text-center">
+								<p className="text-sm text-muted-foreground text-center max-w-full">
 									Current:{" "}
 									<a
 										href={formData.profilePictureUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="underline">
-										{formData.profilePictureUrl
-											.split("/")
-											.pop()}
+										className="underline truncate block max-w-full">
+										{formData.profilePictureUrl.length > 30
+											? `${formData.profilePictureUrl.slice(
+													0,
+													20
+											  )}...${formData.profilePictureUrl.slice(
+													-10
+											  )}`
+											: formData.profilePictureUrl}
 									</a>
 								</p>
 							)}
 						</div>
 						<div className="grid gap-2">
 							<Label htmlFor="app-icon">App Icon</Label>
-							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+							<div className="border-2 border-dashed border-white/40 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-white/60 transition-colors bg-white/5 backdrop-blur-sm shadow-lg">
 								<div className="h-10 w-16 flex items-center justify-center">
 									{formData.appIconUrl ? (
 										<img
@@ -444,8 +465,14 @@ export default function DashboardClient() {
 								</div>
 								<div className="text-center">
 									<p className="text-sm text-muted-foreground mb-2">
-										Upload your app icon (PNG, JPG, SVG)
+										Upload your app icon
+										<span className="hidden sm:inline">
+											(PNG, JPG, SVG)
+										</span>
 									</p>
+									<span className="sm:hidden text-sm text-muted-foreground pb-2">
+										(PNG, JPG, SVG)
+									</span>
 									<UploadButton
 										endpoint="appIconUploader"
 										onClientUploadComplete={
@@ -458,19 +485,26 @@ export default function DashboardClient() {
 												description: `Error: ${error.message}`,
 											})
 										}}
-										className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90"
+										className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90 ut-allowed-content:hidden"
 									/>
 								</div>
 							</div>
 							{formData.appIconUrl && (
-								<p className="text-sm text-muted-foreground text-center">
+								<p className="text-sm text-muted-foreground text-center max-w-full">
 									Current:{" "}
 									<a
 										href={formData.appIconUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="underline">
-										{formData.appIconUrl.split("/").pop()}
+										className="underline truncate block max-w-full">
+										{formData.appIconUrl.length > 30
+											? `${formData.appIconUrl.slice(
+													0,
+													20
+											  )}...${formData.appIconUrl.slice(
+													-10
+											  )}`
+											: formData.appIconUrl}
 									</a>
 								</p>
 							)}
@@ -489,7 +523,7 @@ export default function DashboardClient() {
 								handleFieldChange("name", e.target.value)
 							}
 							placeholder="Your Name"
-							className="text-xl p-2 bg-slate-800"
+							className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 						/>
 					</div>
 					<div className="grid gap-2">
@@ -505,7 +539,7 @@ export default function DashboardClient() {
 								handleFieldChange("aboutMe", e.target.value)
 							}
 							placeholder="A short bio about yourself."
-							className="text-xl p-2 bg-slate-800 h-[150px]"
+							className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300 h-[150px] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/40 hover:scrollbar-thumb-white/60"
 						/>
 					</div>
 					<div className="grid gap-2">
@@ -524,7 +558,7 @@ export default function DashboardClient() {
 								)
 							}
 							placeholder="Your networking pitch."
-							className="text-xl p-2 bg-slate-800 h-[150px]"
+							className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300 h-[150px] scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/40 hover:scrollbar-thumb-white/60"
 						/>
 					</div>
 					<div className="grid gap-4 sm:grid-cols-2 pt-8">
@@ -546,7 +580,7 @@ export default function DashboardClient() {
 										)
 									}
 									placeholder="https://linkedin.com/in/..."
-									className="text-xl p-2 bg-slate-800"
+									className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 								/>
 							</div>
 						</div>
@@ -568,7 +602,7 @@ export default function DashboardClient() {
 										)
 									}
 									placeholder="https://github.com/..."
-									className="text-xl p-2 bg-slate-800"
+									className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 								/>
 							</div>
 						</div>
@@ -592,7 +626,7 @@ export default function DashboardClient() {
 										)
 									}
 									placeholder="https://buymeacoffee.com/..."
-									className="text-xl p-2 bg-slate-800"
+									className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 								/>
 							</div>
 						</div>
@@ -614,7 +648,7 @@ export default function DashboardClient() {
 										)
 									}
 									placeholder="https://your-portfolio.com"
-									className="text-xl p-2 bg-slate-800"
+									className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 								/>
 							</div>
 						</div>
@@ -637,18 +671,24 @@ export default function DashboardClient() {
 									)
 								}
 								placeholder="admin@example.com"
-								className="text-xl p-2 bg-slate-800"
+								className="text-xl p-2 bg-white/30 backdrop-blur-sm border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300"
 							/>
 						</div>
 					</div>
 					<div className="grid gap-2 my-6">
 						<Label htmlFor="resume">Resume File</Label>
-						<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors">
+						<div className="border-2 border-dashed border-white/40 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-white/60 transition-colors bg-white/5 backdrop-blur-sm shadow-lg">
 							<FileText className="h-12 w-12 text-muted-foreground/60" />
 							<div className="text-center">
 								<p className="text-sm text-muted-foreground mb-2">
-									Upload your resume (PDF, DOC, DOCX)
+									Upload your resume{" "}
+									<span className="hidden sm:inline">
+										(PDF, DOC, DOCX)
+									</span>
 								</p>
+								<span className="sm:hidden text-sm text-muted-foreground pb-2">
+									(PDF, DOC, DOCX)
+								</span>
 								<UploadButton
 									endpoint="resumeUploader"
 									onClientUploadComplete={handleResumeUpload}
@@ -659,7 +699,7 @@ export default function DashboardClient() {
 											description: `Error: ${error.message}`,
 										})
 									}}
-									className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90"
+									className="ut-button:bg-primary ut-button:text-primary-foreground ut-button:hover:bg-primary/90 ut-allowed-content:hidden"
 								/>
 							</div>
 						</div>
@@ -670,8 +710,13 @@ export default function DashboardClient() {
 									href={formData.resumeUrl}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="underline">
-									{formData.resumeUrl.split("/").pop()}
+									className="underline truncate block max-w-full">
+									{formData.resumeUrl.length > 30
+										? `${formData.resumeUrl.slice(
+												0,
+												20
+										  )}...${formData.resumeUrl.slice(-10)}`
+										: formData.resumeUrl}
 								</a>
 							</p>
 						)}
@@ -679,7 +724,7 @@ export default function DashboardClient() {
 				</CardContent>
 				<CardFooter>
 					<Button
-						className="w-full"
+						className="w-full h-12 text-xl font-bold bg-gradient-to-r from-lime-500 to-cyan-500 hover:from-lime-600 hover:to-cyan-600 text-white shadow-2xl hover:shadow-3xl hover:shadow-lime-500/30 transition-all duration-300 transform hover:scale-[1.02]"
 						onClick={handleProfileUpdate}
 						disabled={updateProfile.isPending}>
 						{updateProfile.isPending ? "Saving..." : "Save Changes"}
@@ -687,9 +732,9 @@ export default function DashboardClient() {
 				</CardFooter>
 			</Card>
 
-			<Card>
+			<Card className="bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg">
 				<CardHeader>
-					<CardTitle className="text-4xl font-bold">
+					<CardTitle className="text-2xl sm:text-4xl font-bold">
 						Resume Management
 					</CardTitle>
 					<CardDescription>
@@ -700,132 +745,15 @@ export default function DashboardClient() {
 				</CardHeader>
 				<CardContent className="space-y-4">
 					<TooltipProvider>
-						{resumes.map((resume) => (
-							<div
+						{resumes.map((resume, index) => (
+							<ResumeInstance
 								key={resume.id}
-								className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
-								<div className="flex items-center gap-4">
-									<FileText className="h-5 w-5 text-muted-foreground" />
-									<div>
-										<p className="font-semibold">
-											{resume.fileName}
-										</p>
-										<div className="flex items-center gap-2 text-sm text-muted-foreground">
-											<Badge
-												variant={
-													resume.isCurrent
-														? "default"
-														: "secondary"
-												}>
-												{resume.isCurrent
-													? "Current"
-													: "Previous"}
-											</Badge>
-											<span>•</span>
-											<span>
-												{(
-													resume.fileSize /
-													1024 /
-													1024
-												).toFixed(2)}{" "}
-												MB
-											</span>
-											<span>•</span>
-											<span>
-												{resume.downloadCount} downloads
-											</span>
-											<span>•</span>
-											<span>
-												{formatDate(resume.createdAt)}
-											</span>
-										</div>
-									</div>
-								</div>
-								<div className="flex items-center gap-2">
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												variant="ghost"
-												size="sm"
-												onClick={() =>
-													window.open(
-														resume.fileUrl,
-														"_blank"
-													)
-												}>
-												<Copy className="h-4 w-4" />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent>
-											<p>Download resume</p>
-										</TooltipContent>
-									</Tooltip>
-									{!resume.isCurrent && (
-										<Tooltip>
-											<TooltipTrigger asChild>
-												<Button
-													variant="ghost"
-													size="sm"
-													onClick={() =>
-														setCurrentResume.mutate(
-															{
-																id: resume.id,
-															}
-														)
-													}
-													disabled={
-														setCurrentResume.isPending
-													}>
-													<FileText className="h-4 w-4" />
-												</Button>
-											</TooltipTrigger>
-											<TooltipContent>
-												<p>Set as current resume</p>
-											</TooltipContent>
-										</Tooltip>
-									)}
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												variant="ghost"
-												size="sm"
-												onClick={() =>
-													handleDeleteResume(
-														resume.id
-													)
-												}
-												disabled={
-													deleteResume.isPending
-												}>
-												<Trash2 className="h-4 w-4" />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent>
-											<p>Delete resume</p>
-										</TooltipContent>
-									</Tooltip>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<Button
-												variant="ghost"
-												size="sm"
-												onClick={() =>
-													handleDeleteResume(
-														resume.id
-													)
-												}
-												disabled={
-													deleteResume.isPending
-												}>
-												<Trash2 className="h-4 w-4" />
-											</Button>
-										</TooltipTrigger>
-										<TooltipContent>
-											<p>Delete resume</p>
-										</TooltipContent>
-									</Tooltip>
-								</div>
-							</div>
+								resume={resume}
+								index={index}
+								setCurrentResume={setCurrentResume}
+								handleDeleteResume={handleDeleteResume}
+								deleteResume={deleteResume}
+							/>
 						))}
 						{resumes.length === 0 && (
 							<div className="text-center py-8 text-muted-foreground">
@@ -837,9 +765,9 @@ export default function DashboardClient() {
 				</CardContent>
 			</Card>
 
-			<Card>
+			<Card className="bg-white/5 backdrop-blur-sm border border-white/20 shadow-lg">
 				<CardHeader>
-					<CardTitle className="text-4xl font-bold">
+					<CardTitle className="text-2xl sm:text-4xl font-bold">
 						Recent Guests
 					</CardTitle>
 					<CardDescription>
@@ -848,186 +776,14 @@ export default function DashboardClient() {
 				</CardHeader>
 				<CardContent className="space-y-4">
 					{guests.map((guest, index) => (
-						<div
-							key={guest.id}
-							className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
-							<div className="flex items-center gap-4">
-								<Avatar>
-									{guest.profileImageUrl ? (
-										<AvatarImage
-											src={guest.profileImageUrl}
-											alt={guest.name}
-										/>
-									) : null}
-									<AvatarFallback
-										className={cn(
-											"bg-gradient-to-br text-primary-foreground",
-											avatarGradients[
-												index % avatarGradients.length
-											]
-										)}>
-										{getDisplayName(guest as Guest).charAt(
-											0
-										)}
-									</AvatarFallback>
-								</Avatar>
-								<div>
-																			<div className="flex items-center gap-2">
-											<p className="font-semibold">
-												{getDisplayName(guest as Guest)}
-											</p>
-											<Badge 
-												variant="secondary" 
-												className="text-xs bg-black/50 rounded-full">
-												{guest.publicAction}
-											</Badge>
-											<Badge variant="secondary" className="text-xs">
-												{guest.role}
-											</Badge>
-											<span className="text-xs text-muted-foreground">
-												{formatDate(guest.createdAt)}
-											</span>
-											{guest.hidden && (
-												<Badge
-													variant="destructive"
-													className="text-xs">
-													Hidden
-												</Badge>
-											)}
-										</div>
-									<div className="flex items-center gap-4 mt-2">
-										{guest.email && (
-											<div className="flex items-center gap-2">
-												<Mail className="h-4 w-4 text-muted-foreground" />
-												<span className="text-sm text-muted-foreground">
-													{guest.email}
-												</span>
-												<DropdownMenu>
-													<DropdownMenuTrigger
-														asChild>
-														<Button
-															variant="ghost"
-															size="icon"
-															className="h-6 w-6">
-															<MoreVertical className="h-4 w-4" />
-														</Button>
-													</DropdownMenuTrigger>
-													<DropdownMenuContent align="end">
-														<DropdownMenuItem
-															asChild>
-															<a
-																href={`mailto:${guest.email}`}>
-																<Mail className="mr-2 h-4 w-4" />
-																Email
-															</a>
-														</DropdownMenuItem>
-														<DropdownMenuItem
-															onClick={() =>
-																copyToClipboard(
-																	guest.email,
-																	"Email Address"
-																)
-															}>
-															<Copy className="mr-2 h-4 w-4" />
-															Copy
-														</DropdownMenuItem>
-													</DropdownMenuContent>
-												</DropdownMenu>
-											</div>
-										)}
-										{guest.phone && (
-											<div className="flex items-center gap-2">
-												<Phone className="h-4 w-4 text-muted-foreground" />
-												<span className="text-sm text-muted-foreground">
-													{guest.phone}
-												</span>
-												<DropdownMenu>
-													<DropdownMenuTrigger
-														asChild>
-														<Button
-															variant="ghost"
-															size="icon"
-															className="h-6 w-6">
-															<MoreVertical className="h-4 w-4" />
-														</Button>
-													</DropdownMenuTrigger>
-													<DropdownMenuContent align="end">
-														<DropdownMenuItem
-															asChild>
-															<a
-																href={`tel:${guest.phone}`}>
-																<Phone className="mr-2 h-4 w-4" />
-																Call
-															</a>
-														</DropdownMenuItem>
-														<DropdownMenuItem
-															asChild>
-															<a
-																href={`sms:${guest.phone}`}>
-																<MessageSquare className="mr-2 h-4 w-4" />
-																Text
-															</a>
-														</DropdownMenuItem>
-														<DropdownMenuItem
-															onClick={() =>
-																copyToClipboard(
-																	guest.phone ||
-																		"",
-																	"Phone Number"
-																)
-															}>
-															<Copy className="mr-2 h-4 w-4" />
-															Copy
-														</DropdownMenuItem>
-													</DropdownMenuContent>
-												</DropdownMenu>
-											</div>
-										)}
-									</div>
-									{guest.note && (
-										<p className="text-lg mt-2">
-											" {guest.note} "
-										</p>
-									)}
-								</div>
-							</div>
-							<div className="flex items-center gap-2">
-								<Button
-									variant="ghost"
-									size="sm"
-									onClick={() => handleDeleteGuest(guest.id)}>
-									<Trash2 className="h-4 w-4" />
-								</Button>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											variant="ghost"
-											size="sm"
-											onClick={() =>
-												handleToggleGuestHidden(
-													guest.id
-												)
-											}
-											disabled={
-												toggleGuestHidden.isPending
-											}>
-											{guest.hidden ? (
-												<EyeOff className="h-4 w-4" />
-											) : (
-												<Eye className="h-4 w-4" />
-											)}
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>
-											{guest.hidden
-												? "Show Guest"
-												: "Hide Guest"}
-										</p>
-									</TooltipContent>
-								</Tooltip>
-							</div>
-						</div>
+						<DashboardUserComment
+							key={index}
+							guest={guest as Guest}
+							index={index}
+							handleDeleteGuest={handleDeleteGuest}
+							handleToggleGuestHidden={handleToggleGuestHidden}
+							toggleGuestHidden={toggleGuestHidden}
+						/>
 					))}
 					{guests.length === 0 && (
 						<div className="text-center py-8 text-muted-foreground">

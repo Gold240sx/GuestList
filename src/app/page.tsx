@@ -10,7 +10,7 @@ export default async function Home() {
   return (
 		<div className="flex flex-col min-h-screen">
 		
-			<header className="px-4 lg:px-6 h-14 flex items-center sticky top-0 bg-background/20 backdrop-blur-md z-10 border-b border-white/20">
+			<header className="px-4 lg:px-6 h-16 flex items-center sticky top-0 bg-background/20 backdrop-blur-md z-10 border-b border-white/20">
 				<Link
 					href="/"
 					className="flex items-center gap-2"
@@ -19,7 +19,7 @@ export default async function Home() {
 						<img
 							src={profile.appIconUrl}
 							alt="App Icon"
-							className="h-8 w-8 rounded object-cover"
+							className="h-auto w-8 rounded object-cover"
 						/>
 					) : (
 						<User className="h-6 w-6 text-primary" />
@@ -31,7 +31,7 @@ export default async function Home() {
 						asChild
 						variant="ghost"
 						size="sm"
-						className="text-black/60 hover:text-black">
+						className="bg-white/5 text-black/60 hover:text-black hover:bg-white/10">
 						<Link href="/admin">Admin</Link>
 					</Button>
 				</nav>
@@ -40,18 +40,24 @@ export default async function Home() {
 				<PublicProfileClient />
 			</main>
 			<footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-white/20 bg-white/10 backdrop-blur-md">
-				<p className="text-xs text-black">
-					&copy; 2024 LinkHub. All rights reserved.
+				<p className="text-xs text-black text-center sm:text-left">
+					<span className="sm:hidden">
+						&copy; {new Date().getFullYear()} LinkHub. Built by Michael Martell.<br />
+						All rights reserved.
+					</span>
+					<span className="hidden sm:inline">
+						&copy; {new Date().getFullYear()} LinkHub. Built by Michael Martell. All rights reserved.
+					</span>
 				</p>
 				<nav className="sm:ml-auto flex gap-4 sm:gap-6">
 					<Link
-						href="#"
+						href="/terms"
 						className="text-xs text-black hover:underline underline-offset-4"
 						prefetch={false}>
 						Terms of Service
 					</Link>
 					<Link
-						href="#"
+						href="/privacy"
 						className="text-xs text-black hover:underline underline-offset-4"
 						prefetch={false}>
 						Privacy

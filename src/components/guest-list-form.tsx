@@ -166,7 +166,7 @@ export default function GuestListForm({ onGuestAdded, networkingStatement }: Gue
 			</CardHeader>
 			<CardContent className="space-y-4">
 				{isSignedIn && user && (
-					<div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
+					<div className="flex flex-col xs:flex-row items-center gap-3 p-3 bg-muted/30 rounded-lg">
 						<Avatar className="h-10 w-10">
 							<AvatarImage
 								src={user.imageUrl}
@@ -177,7 +177,7 @@ export default function GuestListForm({ onGuestAdded, networkingStatement }: Gue
 								{user.lastName?.[0]}
 							</AvatarFallback>
 						</Avatar>
-						<div className="flex-1">
+						<div className="flex-1 items-center flex flex-col">
 							<p className="font-medium text-black">
 								{user.fullName}
 							</p>
@@ -189,7 +189,7 @@ export default function GuestListForm({ onGuestAdded, networkingStatement }: Gue
 							<Button
 								variant="ghost"
 								size="sm"
-								className="text-muted-foreground hover:text-foreground">
+								className="text-zinc-700 hover:text-black bg-white/50 backdrop-blur-sm border border-white/40 hover:bg-white/60 hover:border-white/60 transition-all duration-300">
 								Sign Out
 							</Button>
 						</SignOutButton>
@@ -280,7 +280,7 @@ export default function GuestListForm({ onGuestAdded, networkingStatement }: Gue
 					type="submit"
 					form="email-form-guestbook"
 					className={cn(
-						"w-full h-10 text-xl font-semibold transition-all duration-300 transform rounded-xl",
+						"w-full h-fit text-xl font-semibold transition-all duration-300 transform rounded-xl whitespace-break-spaces",
 						emailForm.watch("email")
 							? "bg-gradient-to-r from-lime-500 to-cyan-500 hover:from-lime-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-xl hover:shadow-lime-500/25 hover:scale-[1.02] border-2 border-lime-400/50"
 							: "bg-white/10 text-black/30 border-2 border-white/20 cursor-not-allowed opacity-30"
@@ -418,7 +418,7 @@ export default function GuestListForm({ onGuestAdded, networkingStatement }: Gue
 							id="note"
 							placeholder="Send a private note..."
 							{...detailsForm.register("note")}
-							className="h-32 text-xl bg-white/30 border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300 placeholder:text-black/60"
+							className="h-32 text-xl bg-white/30 border-2 border-white/40 focus:border-lime-400 focus:ring-2 focus:ring-lime-400/20 transition-all duration-300 placeholder:text-black/60 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/40 hover:scrollbar-thumb-white/60"
 						/>
 					</div>
 
