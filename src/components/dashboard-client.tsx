@@ -263,14 +263,16 @@ export default function DashboardClient() {
 
   if (isLoading) {
       return (
-          <div className="grid gap-8 md:grid-cols-3">
-              <div className="md:col-span-2 space-y-8">
-                <Skeleton className="h-48 w-full" />
-                <Skeleton className="h-96 w-full" />
-                <Skeleton className="h-64 w-full" />
-              </div>
-              <div className="md:col-span-1 space-y-8">
-                  <Skeleton className="h-48 w-full sticky top-20" />
+          <div className="space-y-8 p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
+              <div className="grid gap-8 md:grid-cols-3">
+                  <div className="md:col-span-2 space-y-8">
+                    <Skeleton className="h-48 w-full" />
+                    <Skeleton className="h-96 w-full" />
+                    <Skeleton className="h-64 w-full" />
+                  </div>
+                  <div className="md:col-span-1 space-y-8">
+                      <Skeleton className="h-48 w-full sticky top-20" />
+                  </div>
               </div>
           </div>
       )

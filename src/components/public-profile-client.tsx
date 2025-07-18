@@ -67,13 +67,13 @@ export default function PublicProfileClient() {
 
   if (isLoading) {
     return (
-        <div className="container max-w-2xl mx-auto px-4 py-8 md:py-12">
-            <section className="flex flex-col items-center text-center">
+        <div className="container max-w-2xl mx-auto px-4 py-8 md:py-16">
+            <section className="flex flex-col items-center text-center p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
                 <Skeleton className="w-48 h-48 rounded-full mb-4" />
                 <Skeleton className="h-8 w-48 mb-2" />
                 <Skeleton className="h-5 w-80" />
             </section>
-            <section className="mt-8">
+            <section className="mt-16 p-6 rounded-t-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <Skeleton className="h-12 w-full" />
                     <Skeleton className="h-12 w-full" />
@@ -82,10 +82,7 @@ export default function PublicProfileClient() {
                     <Skeleton className="h-12 w-full sm:col-span-2" />
                 </div>
             </section>
-            <section className="mt-12">
-                <Skeleton className="h-96 w-full" />
-            </section>
-             <section className="mt-12">
+            <section className="p-6 rounded-b-2xl bg-white/10 backdrop-blur-md border border-white/20 shadow-xl border-t-0">
                 <Skeleton className="h-96 w-full" />
             </section>
         </div>
