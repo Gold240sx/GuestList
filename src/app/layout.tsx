@@ -21,9 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LinkHub - Professional Networking",
+  title: "Michael Martell's LinkHub - Professional Networking",
   description: "Connect with professionals and build your network",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/public/favicon.ico" }],
 };
 
 export default function RootLayout(props: { children: React.ReactNode }) {
