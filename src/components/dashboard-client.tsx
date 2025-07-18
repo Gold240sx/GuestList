@@ -301,7 +301,7 @@ export default function DashboardClient() {
 				<CardContent>
 					<div className="space-y-4">
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-primary">
 									{guests.length}
 								</div>
@@ -309,7 +309,7 @@ export default function DashboardClient() {
 									Total Guests
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-green-500">
 									{guests.filter((guest) => !guest.hidden).length}
 								</div>
@@ -317,7 +317,7 @@ export default function DashboardClient() {
 									Visible
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-blue-500">
 									{guests.filter((guest) => guest.hidden).length}
 								</div>
@@ -325,7 +325,7 @@ export default function DashboardClient() {
 									Hidden
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-purple-500">
 									{resumes.length}
 								</div>
@@ -335,7 +335,7 @@ export default function DashboardClient() {
 							</div>
 						</div>
 						<div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-orange-500">
 									{getGuestsToday(guests as Guest[])}
 								</div>
@@ -343,7 +343,7 @@ export default function DashboardClient() {
 									Today
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-yellow-500">
 									{getGuestsInTimeRange(guests as Guest[], 7)}
 								</div>
@@ -351,7 +351,7 @@ export default function DashboardClient() {
 									This Week
 								</div>
 							</div>
-							<div className="text-center p-4 rounded-lg bg-slate-800/50">
+							<div className="text-center p-4 rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="text-2xl font-bold text-purple-500">
 									{getGuestsInTimeRange(guests as Guest[], 30)}
 								</div>
@@ -380,7 +380,7 @@ export default function DashboardClient() {
 							<Label htmlFor="profile-picture">
 								Profile Picture
 							</Label>
-							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/50">
+							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="h-20 w-20 flex items-center justify-center">
 									{formData.profilePictureUrl ? (
 										<img
@@ -430,13 +430,13 @@ export default function DashboardClient() {
 						</div>
 						<div className="grid gap-2">
 							<Label htmlFor="app-icon">App Icon</Label>
-							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/50">
-								<div className="h-16 w-16 flex items-center justify-center">
+							<div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 flex flex-col items-center justify-center gap-4 hover:border-muted-foreground/40 transition-colors bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
+								<div className="h-10 w-16 flex items-center justify-center">
 									{formData.appIconUrl ? (
 										<img
 											src={formData.appIconUrl}
 											alt="App Icon"
-											className="h-16 w-16 rounded-lg object-cover"
+											className="h-10 w-16 rounded-lg object-cover"
 										/>
 									) : (
 										<User className="h-12 w-12 text-muted-foreground/60" />
@@ -703,7 +703,7 @@ export default function DashboardClient() {
 						{resumes.map((resume) => (
 							<div
 								key={resume.id}
-								className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/50">
+								className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 								<div className="flex items-center gap-4">
 									<FileText className="h-5 w-5 text-muted-foreground" />
 									<div>
@@ -850,7 +850,7 @@ export default function DashboardClient() {
 					{guests.map((guest, index) => (
 						<div
 							key={guest.id}
-							className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/50">
+							className="flex items-center justify-between p-4 border rounded-lg bg-slate-800/5 shadow-inner placeholder:text-zinc-800/70 border-transparent focus:placeholder:opacity-0">
 							<div className="flex items-center gap-4">
 								<Avatar>
 									{guest.profileImageUrl ? (

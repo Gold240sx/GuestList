@@ -28,41 +28,42 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: undefined,
-        variables: {
-          colorPrimary: 'hsl(var(--primary))',
-          colorBackground: 'hsl(var(--background))',
-          colorInputBackground: 'hsl(var(--background))',
-          colorInputText: 'hsl(var(--foreground))',
-        },
-        elements: {
-          formButtonPrimary: 'bg-primary hover:bg-primary/90 text-primary-foreground',
-          card: 'bg-card border border-border shadow-lg',
-          headerTitle: 'text-foreground',
-          headerSubtitle: 'text-muted-foreground',
-        },
-      }}
-    >
-      <html lang="en" className="dark">
-        <body className={`font-sans antialiased ${geistSans.variable} ${geistMono.variable}`}>
-          <NextSSRPlugin
-            /**
-             * The `extractRouterConfig` will extract **only** the route configs
-             * from the router to prevent additional information from being
-             * leaked to the client. The data passed to the client is the same
-             * as if you were to fetch `/api/uploadthing` directly.
-             */
-            routerConfig={extractRouterConfig(ourFileRouter)}
-          />
-          <TRPCReactProvider>
-            {props.children}
-            <Toaster />
-
-          </TRPCReactProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  );
+		<ClerkProvider
+			appearance={{
+				baseTheme: undefined,
+				variables: {
+					colorPrimary: "hsl(var(--primary))",
+					colorBackground: "hsl(var(--background))",
+					colorInputBackground: "hsl(var(--background))",
+					colorInputText: "hsl(var(--foreground))",
+				},
+				elements: {
+					formButtonPrimary:
+						"bg-primary hover:bg-primary/90 text-primary-foreground",
+					card: "bg-card border border-border shadow-lg",
+					headerTitle: "text-foreground",
+					headerSubtitle: "text-muted-foreground",
+				},
+			}}>
+			<html lang="en" className="dark">
+				<body
+					className={`font-sans antialiased ${geistSans.variable} ${geistMono.variable}`}>
+					<div className="topography-bg h-screen w-screen fixed inset-0" />
+					<NextSSRPlugin
+						/**
+						 * The `extractRouterConfig` will extract **only** the route configs
+						 * from the router to prevent additional information from being
+						 * leaked to the client. The data passed to the client is the same
+						 * as if you were to fetch `/api/uploadthing` directly.
+						 */
+						routerConfig={extractRouterConfig(ourFileRouter)}
+					/>
+					<TRPCReactProvider>
+						{props.children}
+						<Toaster />
+					</TRPCReactProvider>
+				</body>
+			</html>
+		</ClerkProvider>
+  )
 }

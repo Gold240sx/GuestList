@@ -38,6 +38,25 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-black;
+    background: linear-gradient(135deg, #829400 0%, #06B2CD 100%);
+    min-height: 100vh;
   }
+
+  /* Override default input focus styles */
+  input:focus,
+  input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Topography background layer */
+.topography-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/topography.svg') center center / cover repeat;
+  opacity: .25; /* Adjust for subtlety */
+}
 }
